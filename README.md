@@ -6,12 +6,12 @@ This project is a simple todo list application built using TypeScript and React 
 
 ## Features
 
-– User Authentication: Before starting the app, users need to provide their name which is used to identify their specific tasks from Local Storage.
-– Adding Tasks: Users can enter a new task and save it by clicking the "Save" button or pressing the Enter key.
-– Completing Tasks: Completed tasks are marked as such and displayed with a strikethrough style.
-– Deleting Tasks: Tasks can be removed from the list at any time.
-– Persistence: All tasks are saved in the Local Storage, allowing users to close and reopen the app without losing their data.
+- **User Authentication**: Before starting the app, users need to provide their name which is used to identify their specific tasks from Local Storage.
+- **Adding Tasks**: Users can enter a new task and save it by clicking the "Save" button or pressing the Enter key.
+- **Completing Tasks**: Completed tasks are marked as such and displayed with a strikethrough style.
+- **Deleting Tasks**: Tasks can be removed from the list at any time.
+- **Persistence**: All tasks are saved in the Local Storage, allowing users to close and reopen the app without losing their data.
 
 ## Technologies Used
 
-React, TypeScript, Bootstrap 5, Local Storage.
+**React, TypeScript, Bootstrap 5, Local Storage**.
