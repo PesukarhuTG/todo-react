@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddTask from './components/AddTask';
 import TaskItem from './components/TaskItem';
+import LoginForm from './components/LoginForm';
 
 type Task = {
   id: string;
@@ -8,8 +9,37 @@ type Task = {
   status: 'inProgress' | 'completed';
 };
 
+// Интерфейс для хранения состояния пользователя
+interface UserData {
+  name: string;
+  tasks: Task[];
+}
+
 const App = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [username, setUsername] = useState<string>('');
+
+  // Загрузка данных пользователя из LocalStorage
+  useEffect(() => {
+    const storedUserData = localStorage.getItem(username);
+    if (storedUserData) {
+      const userData: UserData = JSON.parse(storedUserData);
+      setTasks(userData.tasks || []);
+    }
+  }, [username]);
+
+  // Сохранение задач в LocalStorage
+  useEffect(() => {
+    if (username) {
+      localStorage.setItem(
+        username,
+        JSON.stringify({
+          name: username,
+          tasks,
+        })
+      );
+    }
+  }, [username, tasks]);
 
   // Добавление новой задачи
   const addTask = (taskText: string) => {
@@ -30,9 +60,15 @@ const App = () => {
     //TODO: обновить статус задачи
   };
 
+  // Отражаем форму для ввода имени
+  if (!username) {
+    return <LoginForm onSubmit={(name: string) => setUsername(name)} />;
+  }
+
   return (
     <div className="app-container vh-100 w-100 d-flex align-items-center justify-content-center flex-column">
       <h3>Todo App</h3>
+      <h4>{`Добро пожаловать, ${username}!`}</h4>
       <AddTask onSave={addTask} />
       <div className="table-wrapper">
         <table className="table table-hover table-bordered">
@@ -46,6 +82,10 @@ const App = () => {
           </thead>
 
           <tbody>
+            {tasks.map((task) => (
+              <TaskItem key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />
+            ))}
+
             <TaskItem
               task={{ id: '01', text: 'купить слона', status: 'inProgress' }}
               onDelete={deleteTask}
