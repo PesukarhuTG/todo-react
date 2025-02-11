@@ -1,5 +1,6 @@
 interface Task {
   id: string;
+  number: number;
   text: string;
   status: 'inProgress' | 'completed';
 }
@@ -16,8 +17,8 @@ const TaskItem = ({ task, onDelete, onComplete }: Props) => {
   return (
     <>
       <tr className={`table-${isCompleted ? 'success' : 'light'}`}>
-        <td>1</td>
-        <td className="task" aria-label={task.id} style={{ textDecoration: isCompleted ? 'line-through' : '' }}>
+        <td>{task.number}</td>
+        <td className="task" style={{ textDecoration: isCompleted ? 'line-through' : '' }}>
           {task.text}
         </td>
         <td>{task.status === 'completed' ? 'Выполнено' : 'В процессе'}</td>

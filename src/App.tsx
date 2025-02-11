@@ -82,8 +82,13 @@ const App = () => {
           </thead>
 
           <tbody>
-            {tasks.map((task) => (
-              <TaskItem key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />
+            {tasks.map((task, i) => (
+              <TaskItem
+                key={task.id}
+                task={{ ...task, number: i + 1 }}
+                onDelete={deleteTask}
+                onComplete={completeTask}
+              />
             ))}
           </tbody>
         </table>
