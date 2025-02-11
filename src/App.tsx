@@ -21,6 +21,15 @@ const App = () => {
     setTasks([...tasks, newTask]);
   };
 
+  const deleteTask = (id: string) => {
+    //TODO: удаление задачи
+  };
+
+  // Обновление статуса задачи на "выполненную"
+  const completeTask = (id: string) => {
+    //TODO: обновить статус задачи
+  };
+
   return (
     <div className="app-container vh-100 w-100 d-flex align-items-center justify-content-center flex-column">
       <h3>Todo App</h3>
@@ -37,7 +46,16 @@ const App = () => {
           </thead>
 
           <tbody>
-            <TaskItem />
+            <TaskItem
+              task={{ id: '01', text: 'купить слона', status: 'inProgress' }}
+              onDelete={deleteTask}
+              onComplete={completeTask}
+            />
+            <TaskItem
+              task={{ id: '02', text: 'повесить полку', status: 'completed' }}
+              onDelete={deleteTask}
+              onComplete={completeTask}
+            />
           </tbody>
         </table>
       </div>
