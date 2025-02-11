@@ -52,12 +52,12 @@ const App = () => {
   };
 
   const deleteTask = (id: string) => {
-    //TODO: удаление задачи
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   // Обновление статуса задачи на "выполненную"
   const completeTask = (id: string) => {
-    //TODO: обновить статус задачи
+    setTasks(tasks.map((task) => (task.id === id ? { ...task, status: 'completed' } : task)));
   };
 
   // Отражаем форму для ввода имени
@@ -85,17 +85,6 @@ const App = () => {
             {tasks.map((task) => (
               <TaskItem key={task.id} task={task} onDelete={deleteTask} onComplete={completeTask} />
             ))}
-
-            <TaskItem
-              task={{ id: '01', text: 'купить слона', status: 'inProgress' }}
-              onDelete={deleteTask}
-              onComplete={completeTask}
-            />
-            <TaskItem
-              task={{ id: '02', text: 'повесить полку', status: 'completed' }}
-              onDelete={deleteTask}
-              onComplete={completeTask}
-            />
           </tbody>
         </table>
       </div>
